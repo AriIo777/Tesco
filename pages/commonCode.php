@@ -22,4 +22,25 @@ function navBar($currentPage)
     </header>
 <?php
 }
+
+function  userAlreadyRegistered ($checkedUser) {
+    //this function checks if $checkUser string is an existing use in the Clients.csv
+    //IF the given user IS already in the file we will return TRUE0 -> user already registers
+    //IF NOT (the user did not register) we wukk return from this function FALSE
+
+    $bReturnValue=false; //the user NOT in our database
+
+    //searching:
+    $fHandler = fopen("Client.csv","r");
+    while (!feof ($fHandler)) {
+        $newLine = fgets ($fHandler);
+        $items = explode(";", $newLine); //gives individual items in string 
+        if ($items [0]==$checkedUser)
+            $bReturnValue = true;
+    }
+    fclose($fHandler);
+
+
+    return $bRetValue;
+}
 ?>
